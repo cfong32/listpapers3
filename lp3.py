@@ -1,12 +1,12 @@
-from lp3fn import *
+from lp3_fn import *
 
 path = 'C:/users/luke/papers/'
-pdf_list = path_to_pdf_list(path)
-txt_list = pdf_list_to_txt_list(pdf_list)
-info_list = txt_list_to_info_list(txt_list)
-info_list_wH = txt_list_to_info_list_wH(txt_list)
+pdfpath_list = path_to_pdfpathlist(path)
+txt_list = pdfpathlist_to_txtlist(pdfpath_list)
+info_list = txtlist_to_infolist(txt_list)
+info_list_wH = txtlist_to_infolist_wH(txt_list)
 
-print_info_list(info_list_wH)
+print_infolist(info_list_wH)
 
 
 #==========
@@ -16,7 +16,7 @@ from yattag import indent
 
 doc, tag, text = Doc().tagtext()
 infolistwH = list(info_list_wH)
-pdflist = list(pdf_list)
+pdflist = list(pdfpath_list)
 
 with tag('html'):
     with tag('body'):
