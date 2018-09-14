@@ -7,8 +7,8 @@ from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
 
 def pdf_to_str(path, page_limit=0, char_limit=0):
-    assert(isinstance(page_limit, int), 'page_limit has to be an integer.')    #added by fcy 180911
-    assert(isinstance(char_limit, int), 'char_limit has to be an integer.')
+    assert isinstance(page_limit, int), 'page_limit has to be an integer.'    #added by fcy 180911
+    assert isinstance(char_limit, int), 'char_limit has to be an integer.'
     
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
