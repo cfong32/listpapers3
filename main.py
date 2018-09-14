@@ -18,4 +18,4 @@ out = open('output.html','w')
 out.write(gen_table_html(dict_list)) 
 out.close() 
 
-# print ("done")
+print ("done")
