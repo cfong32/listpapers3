@@ -11,13 +11,11 @@ def path_to_pdfpathlist(path):
                 pdfpathlist.append(os.path.join(r, name))
     return pdfpathlist
 
-
 def pdfpathlist_to_txtlist(pdfpathlist):
     txtlist = []
     for item in pdfpathlist:
         txtlist.append(pdf_to_str(item, page_limit=1, char_limit=1000))
     return txtlist
-
 
 def txtlist_to_infolist(txtlist, with_headings=False):
     infolist = []
@@ -30,10 +28,8 @@ def txtlist_to_infolist(txtlist, with_headings=False):
 
     return infolist
 
-
 def txtlist_to_infolist_wH(txtlist):
     return txtlist_to_infolist(txtlist, with_headings=True)
-
 
 def grab_info_from_txt(txt):
     if txt == '### headings ###':
@@ -50,6 +46,25 @@ def grab_info_from_txt(txt):
     
     return [title, author]
 
+def grab_dict_from_txt(txt):
+    info = grab_info_from_txt(txt)
+    title, author = info[0], info[1]
+    return {'title': title, 'author': author}
+
+def txtlist_to_dictlist(txtlist):
+    dictlist = []
+
+    for txt in txtlist:
+        dictlist.append(grab_dict_from_txt(txt))
+
+    return dictlist
+    
+def pdfpathlist_to_dictlist_wlinks(pdfpathlist):
+    txtlist = pdfpathlist_to_txtlist(pdfpathlist)
+    dictlist = txtlist_to_dictlist(txtlist)
+    for i in range(len(txtlist)):
+        dictlist[i]['link'] = pdfpathlist[i]
+    return dictlist
 
 # print functions for debugging
 def print_txtlist(txtlist):
