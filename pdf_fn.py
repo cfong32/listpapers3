@@ -22,26 +22,19 @@ def pdf_to_str(path, page_limit=0, char_limit=0):
     caching = True
     pagenos=set()
 
-
-    if (page_limit == 0):
-        return ''
-
-    elif (page_limit) > 0:
-        i = 0
-        for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
-            interpreter.process_page(page)
-        
-            i += 1
-            if (i >= page_limit):
-                break    #a break - added by Yan 180911
-
+    i = 0
+    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+        interpreter.process_page(page)
+    
+        i += 1
+        if (page_limit > 0 and page_limit >= i):
+            break    #a break - added by Yan 180911
 
     fp.close()
     device.close()
     pdfstr = retstr.getvalue()
     
-    
-    if char_limit > 0 and char_limit < len(pdfstr):        #a break - added by Yan 180911
+    if (char_limit > 0 and char_limit < len(pdfstr)):        #a break - added by Yan 180911
         pdfstr = pdfstr[:char_limit]
 
     retstr.close()

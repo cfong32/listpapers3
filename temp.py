@@ -1,20 +1,14 @@
-# from html_fn import gen_title_row
-# from html_fn import gen_record_row
-# from html_fn import grab_titlelist_from_dictlist
+from list_fn import *
 from html_fn import *
+from pdf_fn import *
 
-a = {'title':'T1', 'author':'Fong', 'link':'http://www.yahoo.com/'}
-b = {'title':'T2', 'author':'Chan', 'year':2014}
-c = {'title':'T3', 'author':'Xi', 'year':2018}
+path = 'C:/users/luke/papers/'
+pdfpath_list = path_to_pdfpathlist(path)
 
-papers = [a, b, c]
+print (pdfpath_list[0])
 
-titles = grab_titlelist_from_dictlist(papers)
+tempout = open('tempout.txt', 'w')
+tempout.write(pdf_to_str(pdfpath_list[0]))
+tempout.close()
 
-print (gen_table_html(papers))
-
-# print (titles)
-
-# print (gen_title_row(titles))
-# for paper in papers:
-#     print (gen_record_row(titles, paper))
+print ("done")

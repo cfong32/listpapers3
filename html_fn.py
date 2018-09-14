@@ -1,17 +1,24 @@
 from yattag import Doc
 from yattag import indent
 
-def gen_table_html(dictlist):
+def gen_table_html(dictlist, order=['title','author','year']):
     doc, tag, text = Doc().tagtext()
 
     with tag('html'):
         with tag('body'):
             with tag('table'):
                 titles = grab_titlelist_from_dictlist(dictlist)
-                doc.asis(gen_title_row(titles))
+                ord_titles = []
+                for item in order:
+                    if item in titles:
+                        titles.remove(item)
+                        ord_titles.append(item)
+                ord_titles += titles
+
+                doc.asis(gen_title_row(ord_titles))
                         
                 for d in dictlist:
-                    doc.asis( gen_record_row(titles, d))
+                    doc.asis( gen_record_row(ord_titles, d))
                     
     return indent(doc.getvalue())
 
